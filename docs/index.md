@@ -1,4 +1,4 @@
-## Sample
+## Page title
 
 One more, finally. Or not? :)
 
@@ -12,7 +12,7 @@ Look what she said:
 
 > This is it!
 
-### Subtitle
+### Section1
 
 And now this:
 

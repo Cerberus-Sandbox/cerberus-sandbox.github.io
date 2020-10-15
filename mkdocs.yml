@@ -1,10 +1,8 @@
-site_name: Test docs
-site_description: 'A docs test'
-site_author: 'Michael Hausenblas'
+site_name: Cerberus Sandbox
+site_description: 'Cerberus Sandbox - Documentation'
+site_author: 'Cerberus-Sandbox Team'
 docs_dir: docs/
-repo_name: 'mhausenblas/actions-sandbox'
-repo_url: 'https://github.com/mhausenblas/actions-sandbox'
-nav:
-    - Home: index.md
+repo_name: 'cerberus-sandbox/cerberus-sandbox.github.io'
+repo_url: 'https://github.com/cerberus-sandbox/cerberus-sandbox.github.io'
 theme:
   name: 'readthedocs'
