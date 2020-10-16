@@ -66,6 +66,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#upgrading-the-live-version">Upgrading the live version</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pages-layout">Pages layout</a>
+    </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../2.%20Coding%20Standards/">2. Coding Standards</a>
@@ -152,9 +154,12 @@ The first one holds the raw mkdocs files, and the second one is the compiled ver
 <h3 id="upgrading-the-live-version">Upgrading the live version</h3>
 <p>Whenever the local content is ready to go, you can use the automatic script <code>ship-to-prod.sh</code> to push the new content on GitHub and rebuild the mkdocs instance, or choose to do it by hands.</p>
 <p>The script is located at the root folder of the <em>cerberus-sandbox</em> repository.</p>
-<p>You can choose to pass a short description of your modification to the script, as a string value, for a better understanding of each commit.</p>
-<pre><code class="language-bash">$ ./ship-to-prod.sh &quot;index update + typo&quot;
+<p>You can choose to pass a short description of your modification to the script, as a string value, for a better understanding of each commit:</p>
+<pre><code class="language-bash">$ chmod +x ./ship-to-prod.sh
+$ ./ship-to-prod.sh &quot;index update + typo&quot;
 </code></pre>
+<p>And that's it, shortly after that, the upgraded version of the documentation website should be up and running.</p>
+<p>For the manual process, two steps are needed:</p>
 <p>First, the mkdocs sources need to be saved in the <code>main</code> branch:</p>
 <pre><code class="language-bash">$ git pull
 $ git checkout main
@@ -168,6 +173,32 @@ $ git push
 <pre><code class="language-bash">$ mkdocs gh-deploy --force --remote-branch master
 </code></pre>
 <p>And that's it. Remember that you'll have to wait several minutes to see your updates on the live page !</p>
+<h3 id="pages-layout">Pages layout</h3>
+<p>Every entry in the Documentation need to follow the same layout.
+The goal is to keep everything consistent with a set of basics rules for the contributors.
+This section is basically a list of rules to follow in order to fully integrate your page in this project.</p>
+<p>A page need to have one (and only one) title, and that title should match the name of the file, even if it contain some special characters or some spaces.</p>
+<pre><code class="language-markedown"> ## This is a title 
+ It match the file 'This is a title.md'
+</code></pre>
+<p>When possible, split your page with sub-sections. It will help the navigation in the side menu, and a quick way to find information in a large page.</p>
+<pre><code class="language-markedown"> ### This is a sub-section
+</code></pre>
+<p>At the beginning of the page, a short description should be made. This can be a sum-up of the page, or a way to identify what the reader will learn.</p>
+<p>When the name of a script, a program file, or a path is used, put it in back-quotes:</p>
+<pre><code class="language-markedown"> `python` is the best interpreted language
+</code></pre>
+<p>Do not write code outside the markedown code blocks:</p>
+<pre><code class="language-markedown"> ```python
+   print(&quot;this is code&quot;)
+ ```
+</code></pre>
+<p>Be as precise as possible when writting about practical technical stuff, and as theoretical as possible when writting about some high-level concepts. Generaly speaking, thoses two part should be keept in separated pages in different sections.
+But be carrefull not to be too precise. This is a documentation about the <code>Cerberus-Sandbox</code>, we don't need to re-write technical documentation about already-existing tools.</p>
+<p>Even in a technical installation process, don't blindly list commands to copy and paste. Explain everything that is relevant.</p>
+<p>Always use relative path, except if the path that you are talking about is standard for everyone.</p>
+<p>Do not use any hardcoded IP or username in your pages.</p>
+<p>Do not write down any personnal credentials or API keys.</p>
               
             </div>
           </div>
