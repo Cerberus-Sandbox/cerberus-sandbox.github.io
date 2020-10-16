@@ -10,7 +10,8 @@ if [[ $? != 0 ]]; then exit 1; fi
 git checkout main
 git add docs/*
 git add mkdocs.yml
-desc="[$(date +%D) $(date +%T)][$(whoami)@$(hostname)][Automatic Commit] Markedown Docs Update"
+if [[ $1 ]]; then desc="[$(date +%D) $(date +%T)][$(whoami)@$(hostname)][Automatic Commit] $1"
+else desc="[$(date +%D) $(date +%T)][$(whoami)@$(hostname)][Automatic Commit] Docs Update" ;fi
 git commit -m "$desc"
 git push
 mkdocs gh-deploy --force --remote-branch master
