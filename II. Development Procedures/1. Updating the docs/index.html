@@ -139,7 +139,7 @@ The first one holds the raw mkdocs files, and the second one is the compiled ver
 <p>Now that you hold a local copy of the documentation website, simply run <code>mkdocs build</code> to generate the compiled HTML pages.</p>
 <p>The entrypoint of the local setup is located in <code>site/index.html</code>.</p>
 <p>If you want to edit the live content, or if you need to add a new page, everything will be done in the <code>docs/</code> folder.</p>
-<p>A typical architecture can be resumed by the follwoing:</p>
+<p>A typical architecture can be resumed by the following:</p>
 <pre><code class="language-bash"> docs/
  ├── I. Subsection n°1
  │   ├── 1. Doc 1.md
@@ -151,7 +151,10 @@ The first one holds the raw mkdocs files, and the second one is the compiled ver
 <p>You can refer to the following cheatsheet to edit your markedown file: <a href="https://www.markdownguide.org/cheat-sheet/">www.markdownguide.org/cheat-sheet/</a></p>
 <h3 id="upgrading-the-live-version">Upgrading the live version</h3>
 <p>Whenever the local content is ready to go, you can use the automatic script <code>ship-to-prod.sh</code> to push the new content on GitHub and rebuild the mkdocs instance, or choose to do it by hands.</p>
-<p>The sript is located at the root folder of the <em>cerberus-sandbox</em> repository.</p>
+<p>The script is located at the root folder of the <em>cerberus-sandbox</em> repository.</p>
+<p>You can choose to pass a short description of your modification to the script, as a string value, for a better understanding of each commit.</p>
+<pre><code class="language-bash">$ ./ship-to-prod.sh &quot;index update + typo&quot;
+</code></pre>
 <p>First, the mkdocs sources need to be saved in the <code>main</code> branch:</p>
 <pre><code class="language-bash">$ git pull
 $ git checkout main
