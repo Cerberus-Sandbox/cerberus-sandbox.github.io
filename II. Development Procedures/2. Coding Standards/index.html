@@ -158,6 +158,12 @@ i.e: <code>StaticEngine.py</code>, <code>Disassembler.py</code>, <code>PeParser.
 <pre><code class="language-python"> from lib import function
 </code></pre>
 <ul>
+<li>For performance reason, string formating should not be done using concatenation of variables and strings, nor by using format strings. Instead, use f-strings. They are faster to load, and very clear to read:</li>
+</ul>
+<pre><code class="language-python"> name = &quot;cerberus&quot;
+ f&quot;The best sandbox is {name}-sandbox.&quot;
+</code></pre>
+<ul>
 <li>Logs messages should use the Python <code>logger</code> objects. Don't print anything, log it. If your script or function support this usecase, try to pass the log level as an argument. Always keep your logs message as clear and minimal as possible.</li>
 </ul>
 <pre><code class="language-python"> import logging
@@ -169,10 +175,32 @@ i.e: <code>StaticEngine.py</code>, <code>Disassembler.py</code>, <code>PeParser.
  logging.critical('Everything is broken')
 </code></pre>
 <ul>
-<li>For performance reason, string formating should not be done using concatenation of variables and strings, nor by using format strings. Instead, use f-strings. They are faster to load, and very clear to read:</li>
+<li>Use f-strings inside your loggers objects:</li>
 </ul>
-<pre><code class="language-python"> name = &quot;cerberus&quot;
- f&quot;The best sandbox is {name}-sandbox.&quot;
+<pre><code class="language-python"> logging.error('the file {filename} was not found')
+</code></pre>
+<ul>
+<li>Configure the logs of your application to be redirect to a static logfile, and to stdout (you can skip the stdout redirect part if you don't need to; You are in fact advise <em>not</em> to print anything on stdout):</li>
+</ul>
+<pre><code class="language-python">logging.basicConfig(filename='out.log', format='[%(asctime)s][%(name)s][%(levelname)s] %(message)s', filemode='w+')
+logger = logging.getLogger('Application name')      # Name of the application that is going to generate logs
+logger.setLevel('DEBUG')                # The static log file should have the higher log level
+console = logging.StreamHandler()           # 'console' identify the logs that should be print to stdout
+console.setLevel(logging.getLevelName(args.log))    # The console logging is choosen by the user (without affecting the static log file level)
+formatter = logging.Formatter('[%(asctime)s][%(name)s][%(levelname)s] %(message)s')
+console.setFormatter(formatter)             # Set the format of the stdout logs
+logger.addHandler(console)              # The static file will also get a copy of everything that is print to the console
+</code></pre>
+<ul>
+<li>The logger output should be redirect by default to <code>/var/log/cerberus.log</code>:</li>
+</ul>
+<pre><code class="language-python">parser.add_argument(&quot;-o&quot;, &quot;--output&quot;, help = &quot;Log file. Default=/var/log/cerberus.log&quot;, required = False, default = &quot;/var/log/cerberus.log&quot;)
+logging.basicConfig(filename=args.output, ...)
+</code></pre>
+<ul>
+<li>The logs format should match this one (but you can add additionnal fields inside if you need to be more precise):</li>
+</ul>
+<pre><code class="language-python">format='[%(asctime)s][%(name)s][%(levelname)s] %(message)s'
 </code></pre>
 <ul>
 <li>Functions name should describe the global job of the function, with the same construct as the filename (using uppercase letter for each new word, and without any spaces). The first letter should be lowercase:</li>
