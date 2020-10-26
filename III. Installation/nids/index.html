@@ -74,22 +74,20 @@
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">NIDS Installation</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#debian-installation">Debian Installation</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#workbench-preparation">Workbench preparation</a>
-    </li>
-        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#suricata-installation">Suricata installation</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#installation-of-the-compilation-chain">Installation of the compilation chain</a>
+    <li class="toctree-l3"><a class="reference internal" href="#compilation-chain-installation">Compilation chain installation</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#compilation-of-suricata">Compilation of suricata</a>
+    <li class="toctree-l3"><a class="reference internal" href="#suricata-configuration">Suricata configuration</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#suricata-rules">Suricata rules</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#run-suricata">Run suricata</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#suricata-configuration">Suricata configuration</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1"></a>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -140,9 +138,10 @@
                 <h1 id="nids-installation">NIDS Installation</h1>
 <p>Before installing an NIDS, you need to prepare your dirtribution. In our case, we are going to use Debian.</p>
 <h2 id="debian-installation">Debian Installation</h2>
-<h3 id="workbench-preparation">Workbench preparation</h3>
+<p>For this installation, I choose the <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/">debian-10.6.0-amd64-netinst.iso</a>.</p>
+<p>During the installation, untick debian desktop environment.</p>
 <h2 id="suricata-installation">Suricata installation</h2>
-<h3 id="installation-of-the-compilation-chain"><strong>Installation of the compilation chain</strong></h3>
+<h3 id="compilation-chain-installation"><strong>Compilation chain installation</strong></h3>
 <p>In order to compile Suricata and its dependencies, it is necessary to install on the system, a compilation chain</p>
 <p><strong>Lexical and syntax analysers</strong></p>
 <ul>
@@ -177,25 +176,91 @@
 <li><code>LibNet</code> : Provides low-level network interaction functions.</li>
 <li><code>LibYaml</code> : Provides data processing functions using the YAML form standard.</li>
 <li><code>LibNetFilter</code> : Provides interaction functions with the kernel firewall.</li>
-<li><code>Zlib</code> : </li>
-<li><code>LibJansson</code> :</li>
+<li><code>Zlib</code> : Provides functions for compressing / decompressing data ;</li>
+<li><code>LibJansson</code> : Provides functions for data processing using theJSON (JavaScript Object Notation) format.</li>
 </ul>
 <pre><code>apt install libpcre3 libpcre3-dbg libpcre3-dev libpcap-dev libnet1-dev libyaml-0-2 libyaml-dev libnetfilter-queue-dev zlib1g zlib1g-dev libmagic-dev libcap-ng-dev libjansson-dev liblz4-dev libnss3-dev pkg-config magic coccinelle cbindgen rustc 
 </code></pre>
-<h3 id="compilation-of-suricata"><strong>Compilation of suricata</strong></h3>
-<pre><code>$ sudo apt install suricata
-$ ./configure
+<p><strong>Suricata download</strong></p>
+<p>To download and build Suricata, enter the following:</p>
+<pre><code>$ wget http://www.openinfosecfoundation.org/download/suricata-6.0.0.tar.gz
+$ tar -xvzf suricata-6.0.0.tar.gz
+$ cd suricata-6.0.0
+</code></pre>
+<p><strong>Compilation of suricata</strong></p>
+<p>To compile and install the program, you have to continue with the next commands:</p>
+<pre><code>$ ./configure
 $ make
 $ make install
 </code></pre>
-<h2 id="suricata-configuration">Suricata configuration</h2>
-<p>Creation of configuration files :</p>
-<pre><code>$ cd /etc/suricata
-$ cp {/etc/suricata.yaml,/etc/classification.config,reference.config} /etc/suricata
+<p>To make sure the existing list with libraries will be updated with the new library, enter:</p>
+<pre><code>$ ldconfig
+</code></pre>
+<h3 id="suricata-configuration">Suricata configuration</h3>
+<p><strong>Creation of configuration files</strong></p>
+<p>Creation of the event log storage directory :</p>
+<pre><code>$ mkdir /var/log/suricata
+</code></pre>
+<p>Creation of rules storage directory :</p>
+<pre><code>$ mkdir -p /etc/suricata/rules
+</code></pre>
+<p>Creating configuration files :</p>
+<pre><code>$ cp {suricata.yaml,etc/classification.config,etc/reference.config} /etc/suricata
 $ touch /etc/suricata/threshold.config
 </code></pre>
-<p>Modification of the configuration file suricata.yaml :</p>
-<h2 id="_1"></h2>
+<p>Modification of the configuration file <code>suricata.yaml</code> :</p>
+<pre><code>$ vi /etc/suricata/suricata.yaml
+</code></pre>
+<p>Modification of local variables in Suricata :</p>
+<pre><code class="language-bash">    HOME_NET: &quot;192.168.25.0/24&quot;
+</code></pre>
+<p>Deactivation of rules allowing alerts to be sent to the SIEM :</p>
+<pre><code class="language-bash"># alert output to prelude (http://www.prelude-technologies.com/) only
+# available if Suricata has been compiled with --enable-prelude
+# - alert-prelude:
+# enabled: no
+# profile: suricata
+# log-packet-content: no
+# log-packet-header: yes
+</code></pre>
+<p>Configuration of logging flows :</p>
+<pre><code class="language-bash"># Define your logging outputs. If none are defined, or they are all  
+# disabled you will get the default - console output.  
+outputs:  
+- console:      
+    enabled: yes  
+- file:      
+    enabled: yes      
+    filename: /var/log/suricata/suricata.log
+</code></pre>
+<h4 id="suricata-rules"><strong>Suricata rules</strong></h4>
+<p>First you have to install suricata-update :</p>
+<pre><code>sudo apt install suricata-update
+</code></pre>
+<p>If upgrading from an older version of Suricata, or running a development version that may not be bundled with Suricata-Update, you will have to check that your <code>suricata.yaml</code> is configured for Suricata-Update. The main difference is the <code>default-rule-path</code> which is <code>/var/lib/suricata/rules</code> when using Suricata-Update.</p>
+<p>You will want to update your suricata.yaml to have the following 
+:</p>
+<pre><code class="language-bash">default-rule-path: /var/lib/suricata/rules
+
+rule-files:
+    - suricata.rules
+</code></pre>
+<p><strong>Discover Other Available Rule Sources</strong></p>
+<p>First update the rule source index with the update-sources command, for example:</p>
+<pre><code>$ suricata-update update-sources
+</code></pre>
+<p>Then list the sources from the index. Example :</p>
+<pre><code>$ suricata-update list-sources
+</code></pre>
+<p>Now enable the ptresearch/attackdetection ruleset :</p>
+<pre><code>$ suricata-update enable-source ptresearch/attackdetection
+</code></pre>
+<p>And update your rules again:</p>
+<pre><code>$ suricata-update
+</code></pre>
+<h4 id="run-suricata"><strong>Run suricata</strong></h4>
+<pre><code>$ suricata -c /etc/suricata/suricata.yaml -i ens33
+</code></pre>
               
             </div>
           </div>
