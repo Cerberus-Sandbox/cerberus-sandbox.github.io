@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Cerberus-Sandbox Team">
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>4. Module Development Guide - Cerberus Sandbox</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "4. Module Development Guide";
+    var mkdocs_page_input_path = "II. Development Procedures/4. Module Development Guide.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Cerberus Sandbox</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">I. Overview</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../I.%20Overview/1.%20What%20is%20Cerberus-Sandbox%20%3F/">1. What is Cerberus Sandbox ?</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../I.%20Overview/2.%20How%20it%20works%20%3F/">2. How it works ?</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">II. Development Procedures</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../1.%20Updating%20the%20docs/">1. Updating the docs</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../2.%20Coding%20Standards/">2. Coding Standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../3.%20Git%20Workflow/">3. Git Workflow</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">4. Module Development Guide</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#general-layout">General Layout</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#orchestrator">Orchestrator</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#module-layout">Module layout</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#priority">Priority</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#input">Input</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#output">Output</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#returns">Returns</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#return-code">Return code</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#module-template">Module template</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">III. Installation</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/">Index</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/nids/">NIDS Installation</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">IV. Internal Design</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../IV.%20Internal%20Design/">Index</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Cerberus Sandbox</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>II. Development Procedures &raquo;</li>
+        
+      
+    
+    <li>4. Module Development Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/cerberus-sandbox/cerberus-sandbox.github.io/edit/master/docs/II. Development Procedures/4. Module Development Guide.md"> Edit on cerberus-sandbox/cerberus-sandbox.github.io</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="module-development-guide">Module Development Guide</h2>
+<p>This short guide aim to help developers to write and integrate new functionalities in the Cerberus-Sandbox.</p>
+<p>In Cerberus-Sandbox, every functionnal piece of code can be describe as a module.</p>
+<p>A module can work as a standalone tool, but can also be easily integrated in the general workflow of the sandbox.</p>
+<p>The following will give you an insight on what's a module, how to make it works, and how to integrate it into Cerberus.</p>
+<h3 id="general-layout">General Layout</h3>
+<p>Modules are stored as Python scripts under <code>cerberus/core/static_engine/Modules/</code>.</p>
+<p>By keeping everything in a modular architecture, we aim to encourage developers to add custom functionnalities that match their needs, without having to understand the whole code-base of the project. It is also easier for the inital development stage and for further official upgrades, as we don't need to deal with already existing works and only focus on the core of the functionnalities that we want to add.</p>
+<p>It also gave the ability to easily write new connector with already-existing products, wich is something we want to push forward.</p>
+<h3 id="orchestrator">Orchestrator</h3>
+<p>The script <code>cerberus/core/static_engine/main.py</code> is in charge of the orchestration of the modules. This script is the one that gather, parse and execute modules.</p>
+<p>If a new Python script is simply dropped in the modules folder, without any tweaks to make it works with the so called orchestrator, it will simply be ignored at runtime.</p>
+<p>If your module is malformated, this is the script that will tell you why and where.</p>
+<p>Don't make modification to the core of this script in order to match your needs ! If you have to, it means that your module is not well-written.</p>
+<h3 id="module-layout">Module layout</h3>
+<p>Each module must have a header with the following items:</p>
+<pre><code class="language-python">PRIORITY = 
+INPUT = ['']
+OUTPUT = ['']
+RETURNS = ['']
+RETURN_CODE = { 0 : &quot;Something&quot; }
+</code></pre>
+<h4 id="priority">Priority</h4>
+<p>The <code>PRIORITY</code> keyword is used to tell in which order the modules must be launched. </p>
+<p>Priority numbers don't have to be contiguous. If you want to write several modules, you can reserve an arbitray range of priority from X to Y.</p>
+<h4 id="input">Input</h4>
+<p>The <code>INPUT</code> keyword is used to tell which argument your module need in order to works.</p>
+<p>It's arguments are stored as a python array of strings.</p>
+<p>The available arguments are:
+* 'file' : Absolute path to the input binary to deal with.
+* 'online' : Boolean that indicate if the scan is online of offline.
+* 'id' : Identifier number for the scan.
+* 'None' : No input arguments.</p>
+<p>Their is no order for thoses arguments, but keep it aligned with your <code>main()</code> declaration.</p>
+<p>If your main() function is declared as such:</p>
+<pre><code class="language-python">    def main(input_file, is_online):
+</code></pre>
+<p>The <code>input</code> tag must follow the same order:</p>
+<pre><code class="language-python">INPUT = ['file', 'online']
+</code></pre>
+<h4 id="output">Output</h4>
+<p>If your module require to store something to the filesystem as an output, you can specify it in the <code>OUTPUT</code> tag.</p>
+<p>It's arguments are stored as a python array of strings.</p>
+<p>You can  specify relative hardocded path to the <code>output</code> tag, but keep in mind that the translation of the following keywords is automatically done, in order to adda layer of absraction from the module's point of view.</p>
+<ul>
+<li>'base' : Path to the base of the scan filesystem</li>
+<li>'sha1hash' : SHA1sum of the given binary</li>
+<li>'sha256hash' : SHA256sum of the given binary</li>
+<li>'md5hash' MD5sum of the given binary</li>
+<li>'id' : ID of the scan</li>
+<li>'name' : Original name of the given file</li>
+</ul>
+<p>For instance, the following output tag is valid, and will be converted to the right absolute path at runtime:</p>
+<pre><code class="language-python">    OUTPUT = ['/base/sha256hash/id/md5hash.disass']
+</code></pre>
+<h4 id="returns">Returns</h4>
+<p>If your module returns a specific information that need to be taken in count by the next modules, you can specify it with the <code>RETURNS</code> tag.</p>
+<p>It's arguments are stored as a python array of strings.</p>
+<h4 id="return-code">Return code</h4>
+<p>In order to raise custom return code and errors for your module, use this tag to specify what are the available return code of your script, and what they mean.</p>
+<p>This is stored as a Python dictionnary, with an integer key and a string value (return code id : description).</p>
+<p>The following return code range need to be used when writting a module:
+* from 00 to 09 : General state (used to avoid 'None' as a return value. Keep tracks of the module's state)
+* from 10 to 19 : Critical errors (failure condition: will immediately stop any further modules)
+* from 21 to 50 : Conditionnal errors (will shortcut some specific modules)</p>
+<p>Here is a snippet of already implemented return code:</p>
+<pre><code class="language-bash">0: 'Module ended without errors'
+1: 'Module ended with errors'
+2: 'Scan succefull'
+
+10: 'File not found'
+11: 'WinAPI references not found (deprecated)'
+12: 'Not a valid PE file'
+13: 'Network error'
+14: 'Metadenfender does not have an entry for the submited sample'
+
+21: 'Is a dot net executable'
+22: 'Is malformated'
+23: 'Scanned binary may be packed'
+24: 'Scanned binary does not seems packed'
+</code></pre>
+<h3 id="module-template">Module template</h3>
+<p>The following template can be used to write a new module:</p>
+<pre><code class="language-python">
+# Module header
+PRIORITY = 55
+INPUT = ['file']
+OUTPUT = ['None']
+RETURNS = ['None']
+RETURN_CODE = { 99 : &quot;Template module&quot;, 100 : &quot;Something else&quot; }
+
+# Main code
+def main(path):
+    if do_something(path):
+        return 99
+    return 100
+
+# For standalone execution of the script
+if __name__ == &quot;__main__&quot;:
+    parser = ArgumentParser(description='Module Name')
+    parser.add_argument('-i', '--input', help='PE File to scan',  metavar='input-file.exe', required=True)
+    parser.add_argument('-l', '--log', help='Log level. Default=INFO', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], required=False, default='INFO')
+    args = parser.parse_args()
+    path = args.input
+
+    main(args.online, args.input)
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../III.%20Installation/" class="btn btn-neutral float-right" title="Index">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../3.%20Git%20Workflow/" class="btn btn-neutral" title="3. Git Workflow"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../3.%20Git%20Workflow/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../III.%20Installation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
