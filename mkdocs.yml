@@ -6,3 +6,4 @@ repo_name: 'cerberus-sandbox/cerberus-sandbox.github.io'
 repo_url: 'https://github.com/cerberus-sandbox/cerberus-sandbox.github.io'
 theme:
   name: 'readthedocs'
+
