@@ -9,7 +9,7 @@
   <meta name="author" content="Cerberus-Sandbox Team">
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>2. How it works ? - Cerberus Sandbox</title>
+  <title>1. What is Cerberus Sandbox - Cerberus Sandbox</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "2. How it works ?";
-    var mkdocs_page_input_path = "I. Overview/2. How it works ?.md";
+    var mkdocs_page_name = "1. What is Cerberus Sandbox";
+    var mkdocs_page_input_path = "I. Overview/1. What is Cerberus-Sandbox.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -48,14 +48,26 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to Cerberus Documentation</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">I. Overview</span></p>
                 <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../1.%20What%20is%20Cerberus-Sandbox%20%3F/">1. What is Cerberus Sandbox ?</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">1. What is Cerberus Sandbox</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#why-we-made-this-sandbox">Why we made this sandbox ?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-cases">Use Cases</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#obtaining-cerberus">Obtaining Cerberus</a>
+    </li>
+    </ul>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">2. How it works ?</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../2.%20How%20it%20works/">2. How it works</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../3.%20Comparison/">3. Comparison</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">II. Development Procedures</span></p>
@@ -71,9 +83,13 @@
                 </ul>
                 <p class="caption"><span class="caption-text">III. Installation</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/">Index</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/1.%20Foreword/">1. Foreword</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/nids/">NIDS Installation</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/2.%20Requirements/">2. Requirements</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/3.%20NIDS/">3. NIDS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../III.%20Installation/4.%20VMI/">4. VMI</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">IV. Internal Design</span></p>
@@ -106,10 +122,10 @@
         
       
     
-    <li>2. How it works ?</li>
+    <li>1. What is Cerberus Sandbox</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/cerberus-sandbox/cerberus-sandbox.github.io/edit/master/docs/I. Overview/2. How it works ?.md"> Edit on cerberus-sandbox/cerberus-sandbox.github.io</a>
+        <a href="https://github.com/cerberus-sandbox/cerberus-sandbox.github.io/edit/master/docs/I. Overview/1. What is Cerberus-Sandbox.md"> Edit on cerberus-sandbox/cerberus-sandbox.github.io</a>
       
     </li>
   </ul>
@@ -119,7 +135,22 @@
           <div role="main">
             <div class="section">
               
-                
+                <h3 id="what-is-cerberus-sandbox">What is Cerberus-Sandbox ?</h3>
+<p>Cerberus is an automated malware analysis environment.    </p>
+<p>The purpose is to help Analysist during the first repetitive steps when they find a new malware. Cerberus is an open source software, he was built like a white box, nothing is hide from the user. The sandbox can be deployed locally and support an offline uses.   </p>
+<h4 id="why-we-made-this-sandbox">Why we made this sandbox ?</h4>
+<p>This sandbox was made because there are lack of white sandbox. When you put a malware sample in sandbox like Cuckoo, Joe, Hybrid-Analysis or any-run, you dont know what they are doing with it. Cerberus allow you to keep malware for personal purpose.</p>
+<h4 id="use-cases">Use Cases</h4>
+<p>It can be used to analyse:<br />
+- Generic Windows executables<br />
+- DLL files<br />
+- PCAP  </p>
+<p>It's modularity allow you to do what ever you want to achieve with Cerberus. </p>
+<h4 id="architecture">Architecture</h4>
+<p>The following picture explains Cerberus main architecture:</p>
+<p><img alt="architecture_overview" src="/images/I. Overview/architecture_overview.png" /></p>
+<h4 id="obtaining-cerberus">Obtaining Cerberus</h4>
+<p>Cerberus can be download from our official <a href="https://github.com/Cerberus-Sandbox/cerberus">git repository</a>.</p>
               
             </div>
           </div>
@@ -127,10 +158,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../II.%20Development%20Procedures/1.%20Updating%20the%20docs/" class="btn btn-neutral float-right" title="1. Updating the docs">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../2.%20How%20it%20works/" class="btn btn-neutral float-right" title="2. How it works">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../1.%20What%20is%20Cerberus-Sandbox%20%3F/" class="btn btn-neutral" title="1. What is Cerberus Sandbox ?"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../.." class="btn btn-neutral" title="Welcome to Cerberus Documentation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -156,10 +187,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../1.%20What%20is%20Cerberus-Sandbox%20%3F/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../II.%20Development%20Procedures/1.%20Updating%20the%20docs/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../2.%20How%20it%20works/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

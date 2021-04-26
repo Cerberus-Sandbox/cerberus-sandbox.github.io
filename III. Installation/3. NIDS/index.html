@@ -9,7 +9,7 @@
   <meta name="author" content="Cerberus-Sandbox Team">
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>NIDS Installation - Cerberus Sandbox</title>
+  <title>3. NIDS - Cerberus Sandbox</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "NIDS Installation";
-    var mkdocs_page_input_path = "III. Installation/nids.md";
+    var mkdocs_page_name = "3. NIDS";
+    var mkdocs_page_input_path = "III. Installation/3. NIDS.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -48,14 +48,16 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to Cerberus Documentation</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">I. Overview</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../I.%20Overview/1.%20What%20is%20Cerberus-Sandbox%20%3F/">1. What is Cerberus Sandbox ?</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../I.%20Overview/1.%20What%20is%20Cerberus-Sandbox/">1. What is Cerberus Sandbox</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../I.%20Overview/2.%20How%20it%20works%20%3F/">2. How it works ?</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../I.%20Overview/2.%20How%20it%20works/">2. How it works</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../I.%20Overview/3.%20Comparison/">3. Comparison</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">II. Development Procedures</span></p>
@@ -71,9 +73,11 @@
                 </ul>
                 <p class="caption"><span class="caption-text">III. Installation</span></p>
                 <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../">Index</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../1.%20Foreword/">1. Foreword</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">NIDS Installation</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../2.%20Requirements/">2. Requirements</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">3. NIDS</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#debian-installation">Debian Installation</a>
     </li>
@@ -81,13 +85,15 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#compilation-chain-installation">Compilation chain installation</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#suricata-download">Suricata download</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#suricata-compilation">Suricata compilation</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#suricata-configuration">Suricata configuration</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#suricata-rules">Suricata rules</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#run-suricata">Run suricata</a>
+    <li class="toctree-l3"><a class="reference internal" href="#suricata-rules">Suricata rules</a>
     </li>
-        </ul>
+    <li class="toctree-l3"><a class="reference internal" href="#run-suricata">Run suricata</a>
     </li>
         </ul>
     </li>
@@ -106,6 +112,8 @@
     <li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a>
     </li>
     </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../4.%20VMI/">4. VMI</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">IV. Internal Design</span></p>
@@ -138,10 +146,10 @@
         
       
     
-    <li>NIDS Installation</li>
+    <li>3. NIDS</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/cerberus-sandbox/cerberus-sandbox.github.io/edit/master/docs/III. Installation/nids.md"> Edit on cerberus-sandbox/cerberus-sandbox.github.io</a>
+        <a href="https://github.com/cerberus-sandbox/cerberus-sandbox.github.io/edit/master/docs/III. Installation/3. NIDS.md"> Edit on cerberus-sandbox/cerberus-sandbox.github.io</a>
       
     </li>
   </ul>
@@ -151,13 +159,13 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nids-installation">NIDS Installation</h1>
-<p>Before installing an NIDS, you need to prepare your dirtribution. In our case, we are going to use Debian.</p>
-<h2 id="debian-installation">Debian Installation</h2>
+                <h2 id="nids">NIDS</h2>
+<p>Before installing an NIDS, you need to prepare your distribution. In our case, we are going to use Debian.</p>
+<h3 id="debian-installation">Debian Installation</h3>
 <p>For this installation, I choose the <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/">debian-10.6.0-amd64-netinst.iso</a>.</p>
 <p>During the installation, untick debian desktop environment.</p>
-<h2 id="suricata-installation">Suricata installation</h2>
-<h3 id="compilation-chain-installation"><strong>Compilation chain installation</strong></h3>
+<h3 id="suricata-installation">Suricata installation</h3>
+<h4 id="compilation-chain-installation"><strong>Compilation chain installation</strong></h4>
 <p>In order to compile Suricata and its dependencies, it is necessary to install on the system, a compilation chain</p>
 <p><strong>Lexical and syntax analysers</strong></p>
 <ul>
@@ -197,13 +205,13 @@
 </ul>
 <pre><code>apt install libpcre3 libpcre3-dbg libpcre3-dev libpcap-dev libnet1-dev libyaml-0-2 libyaml-dev libnetfilter-queue-dev zlib1g zlib1g-dev libmagic-dev libcap-ng-dev libjansson-dev liblz4-dev libnss3-dev pkg-config magic coccinelle cbindgen rustc 
 </code></pre>
-<p><strong>Suricata download</strong></p>
+<h4 id="suricata-download">Suricata download</h4>
 <p>To download and build Suricata, enter the following:</p>
 <pre><code>$ wget http://www.openinfosecfoundation.org/download/suricata-6.0.0.tar.gz
 $ tar -xvzf suricata-6.0.0.tar.gz
 $ cd suricata-6.0.0
 </code></pre>
-<p><strong>Compilation of suricata</strong></p>
+<h4 id="suricata-compilation">Suricata compilation</h4>
 <p>To compile and install the program, you have to continue with the next commands:</p>
 <pre><code>$ ./configure
 $ make
@@ -212,7 +220,7 @@ $ make install
 <p>To make sure the existing list with libraries will be updated with the new library, enter:</p>
 <pre><code>$ ldconfig
 </code></pre>
-<h3 id="suricata-configuration">Suricata configuration</h3>
+<h4 id="suricata-configuration">Suricata configuration</h4>
 <p><strong>Creation of configuration files</strong></p>
 <p>Creation of the event log storage directory :</p>
 <pre><code>$ mkdir /var/log/suricata
@@ -277,7 +285,7 @@ rule-files:
 <h4 id="run-suricata"><strong>Run suricata</strong></h4>
 <pre><code>$ suricata -c /etc/suricata/suricata.yaml -i ens33
 </code></pre>
-<h2 id="tcpdump-installation">Tcpdump installation</h2>
+<h3 id="tcpdump-installation">Tcpdump installation</h3>
 <p>Tcpdump is a data-network packet analyzer computer program that runs under a command line interface. It allows the user to display TCP/IP and other packets being transmitted or received over a network to which the computer is attached.</p>
 <p>We are going to use it in order to capture the traffic between the malware and internet or fake internet.</p>
 <p>First, we must install the packet tcpdump :</p>
@@ -291,9 +299,9 @@ rule-files:
 </code></pre>
 <pre><code>$ tcpdump -i [networkinterface] -w capture_file
 </code></pre>
-<h2 id="installing-a-fake-internet-with-inetsim-and-polarproxy">Installing a Fake Internet with INetSim and PolarProxy</h2>
+<h3 id="installing-a-fake-internet-with-inetsim-and-polarproxy">Installing a Fake Internet with INetSim and PolarProxy</h3>
 <p><strong>Inetsim</strong> is a software that simulates common internet services like HTTP, SMTP, DNS, FTP, IRC. This software is useful when analysing the network behavior of malware without connecting them to Internet. <strong>PolarProxy</strong> is a transparent SSL/TLS proxy. He is primarily designed to intercept and decrypt TLS encrypted traffic from malware. PolarProxy decrypts and re-encrypts TLS traffic, while also saving the decrypted traffic in a PCAP file that can be loaded into Wireshark or an intrusion detection system (IDS).  </p>
-<h3 id="inetsim-installation">INetSim Installation</h3>
+<h4 id="inetsim-installation">INetSim Installation</h4>
 <p>To install INetSim using apt, add the INetSim Debian Archive repository to your apt sources: </p>
 <pre><code class="language-bash">$ echo &quot;deb http://www.inetsim.org/debian/ binary/&quot; &gt; /etc/apt/sources.list.d/inetsim.list 
 </code></pre>
@@ -308,7 +316,7 @@ After installing the key, update the cache of available packages: </p>
 <p>Finally, install INetSim: </p>
 <pre><code>$ apt install inetsim
 </code></pre>
-<h3 id="configuration">Configuration</h3>
+<h4 id="configuration">Configuration</h4>
 <p>By default INetSim listens on 127.0.0.1, for change this you need to un-commenting and editing the service_bind-address variable in /etc/inetsim/inetsim.conf.</p>
 <pre><code>service_bind_address    192.168.53.19 
 </code></pre>
@@ -328,7 +336,7 @@ start_service smtp
 <p>Verify that you can access INetSim's HTTP server with curl: </p>
 <pre><code>curl http://192.168.53.19
 </code></pre>
-<h3 id="polarproxy-installation">PolarProxy installation</h3>
+<h4 id="polarproxy-installation">PolarProxy installation</h4>
 <pre><code>sudo mkdir /var/log/PolarProxy
 mkdir ~/PolarProxy
 cd ~/PolarProxy/
@@ -382,9 +390,9 @@ $ curl --insecure --resolve example.com:465:192.168.53.19 smtps://example.com
 <p>It is now time to save the firewall rules, so that they will survive reboots.</p>
 <pre><code>$ sudo apt-get install iptables-persistent 
 </code></pre>
-<h2 id="sources">Sources</h2>
-<p>https://www.netresec.com/?page=Blog&amp;month=2019-12&amp;post=Installing-a-Fake-Internet-with-INetSim-and-PolarProxy</p>
-<p>https://github.com/catmin/inetsim/tree/master/data/http/fakefiles</p>
+<h3 id="sources">Sources</h3>
+<p>https://www.netresec.com/?page=Blog&amp;month=2019-12&amp;  post=Installing-a-Fake-Internet-with-INetSim-and-PolarProxy  </p>
+<p>https://github.com/catmin/inetsim/tree/master/data/http/fakefiles  </p>
               
             </div>
           </div>
@@ -392,10 +400,10 @@ $ curl --insecure --resolve example.com:465:192.168.53.19 smtps://example.com
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../IV.%20Internal%20Design/" class="btn btn-neutral float-right" title="Index">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../4.%20VMI/" class="btn btn-neutral float-right" title="4. VMI">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="Index"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../2.%20Requirements/" class="btn btn-neutral" title="2. Requirements"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -421,10 +429,10 @@ $ curl --insecure --resolve example.com:465:192.168.53.19 smtps://example.com
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../2.%20Requirements/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../IV.%20Internal%20Design/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../4.%20VMI/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
